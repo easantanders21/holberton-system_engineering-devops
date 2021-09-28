@@ -1,2 +1,2 @@
 #!/bin/bash
-sort | uniq -c | sort | grep 1 | cut -c 9-
+sort | uniq -u
