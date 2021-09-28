@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f | tail -n 10 | tac
+ls -t | head
