@@ -1,0 +1,2 @@
+#!/bin/bash
+sort prueba | uniq -c | sort | grep 1 | cut -c 9-10
