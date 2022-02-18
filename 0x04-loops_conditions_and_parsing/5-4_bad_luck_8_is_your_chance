@@ -11,7 +11,7 @@ elif [ $i = 7 ]
 then
 echo "good luck"
 else
-echo "Holberton School"
+echo "Best School"
 fi
 i=$((i+1))
 done
