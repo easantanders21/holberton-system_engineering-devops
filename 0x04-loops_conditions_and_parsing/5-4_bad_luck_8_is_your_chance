@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script loops from 1 to 10 displaying
 i="0"
 
 while [ $i -lt 10 ]
