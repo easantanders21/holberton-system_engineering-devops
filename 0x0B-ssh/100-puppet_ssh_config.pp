@@ -1,4 +1,4 @@
-# create a simple hostname and ip host entry
+# create a simple
 file_line{ 'Turn off passwd auth':
   ensure => 'present',
   path   => '/etc/ssh/sshd_config',
