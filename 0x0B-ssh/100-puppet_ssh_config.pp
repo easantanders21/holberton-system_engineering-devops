@@ -4,9 +4,11 @@ file_line{'disable password login':
   path => '/etc/ssh/sshd_config',
   line => 'PasswordAuthentication no',
   ensure => 'absent',
+  replace => true,
 }
 file_line { 'Identity file':
   path    => '/etc/ssh/ssh_config',
   line    => 'IdentityFile ~/.ssh/school',
   ensure => 'absent',
+  replace => true,
 }
