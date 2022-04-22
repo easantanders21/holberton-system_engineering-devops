@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# write a Bash script that configures a new Ubuntu machine nginx
+
+sudo service apache2 start
