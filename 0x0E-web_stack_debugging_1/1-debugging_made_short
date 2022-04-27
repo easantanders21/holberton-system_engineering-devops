@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # find out what’s keeping your Ubuntu container’s Nginx
-sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx restart
+pgrep nginx | xargs kill -1
