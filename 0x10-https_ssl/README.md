@@ -1,0 +1,1 @@
+_Create a certificate using certbot and configure HAproxy_
