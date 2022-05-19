@@ -13,9 +13,11 @@ if __name__ == "__main__":
     TASK_TITLE = []
 
     # Get information of user
-    url = "https://jsonplaceholder.typicode.com/users/" + argv[1]
-    user = requests.get(url).json()
-    EMPLOYEE_NAME = user['name']
+    users = requests.get("https://jsonplaceholder.typicode.com/users").json()
+    for user in users:
+        if user['id'] == int(argv[1]):
+            EMPLOYEE_NAME = user['name']
+            break
 
     # Get information todos
     todos = requests.get("https://jsonplaceholder.typicode.com/todos").json()
