@@ -27,5 +27,5 @@ if __name__ == "__main__":
         data[user_id].append(aux_dict)
         aux_dict = {}
 
-    with open(file_name, mode="w", encoding="utf-8") as jsonfile:
-        json.dump(data, jsonfile, ensure_ascii=False)
+    with open(file_name, mode="w") as jsonfile:
+        json.dump(data, jsonfile)
