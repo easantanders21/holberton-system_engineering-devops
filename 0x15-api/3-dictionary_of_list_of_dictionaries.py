@@ -13,11 +13,9 @@ if __name__ == "__main__":
 
     # Get information of the users and todos
     users = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}".format(
-                argv[1])).json()
+        "https://jsonplaceholder.typicode.com/users").json()
     todos = requests.get(
-        "https://jsonplaceholder.typicode.com/todos?userId={}".format(
-                argv[1])).json()
+        "https://jsonplaceholder.typicode.com/todos").json()
 
     for user in users:
         data[user.get('id')] = []
