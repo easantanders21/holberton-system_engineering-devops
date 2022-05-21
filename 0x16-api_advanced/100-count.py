@@ -2,7 +2,7 @@
 """  function that queries the Reddit API;
 and print ten titles """
 import requests
-import json
+from operator import itemgetter
 
 
 def count_words(subreddit, word_list):
@@ -14,58 +14,31 @@ def count_words(subreddit, word_list):
         str_word = " ".join(word_list).lower()
         word_list = str_word.split()
         str_list = " ".join(hot_list).lower()
-        list_values = []
-        recurse_3(my_dict, str_list, word_list, 0, list_values)
-        print(my_dict)
+        for word in word_list:
+            n = str_list.count(word)
+            my_dict[word] = n
+        sort_dict = dict(sorted(my_dict.items(),
+                                key=itemgetter(1), reverse=True))
+        for k, v in sort_dict.items():
+            if v > 0:
+                print("{}: {}".format(k, v))
     except Exception:
-        print("fail")
         pass
 
 
-def recurse(subreddit, hot_list=[]):
+def recurse(subreddit, hot_list=[], after=""):
     """ return list of title """
     header = {'User-Agent': 'my_user_agent'}
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json?after={}".format(subreddit,
+                                                                 after)
     try:
-        response = requests.get(url, header,
-                                allow_redirects=False).json().get(
-                                    "data").get("children")
-        recurse_2(0, response, hot_list)
+        response = requests.get(url, headers=header,
+                                allow_redirects=False).json().get("data")
+        after = response.get("after", None)
+        for children in response.get("children"):
+            hot_list.append(children.get("data").get("title"))
+        if after is not None:
+            recurse(subreddit, hot_list, after)
         return(hot_list)
     except Exception:
         return(None)
-
-
-def recurse_2(children_i=0, children_list=[], hot_list=[]):
-    """ recurse function """
-    try:
-        hot_list.append(children_list[children_i].get("data").get("title"))
-        children_i += 1
-        recurse_2(children_i, children_list, hot_list)
-    except Exception:
-        return
-
-def recurse_3(my_dict, str_list, word_list, i, list_values):
-    try:
-        n = 0
-        my_word = word_list[i]
-        n = str_list.count(my_word)
-        if n > 0:
-            #my_dict[my_word] = n
-            list_values.append(n)
-        i += 1
-        #print(i)
-        recurse_3(my_dict, str_list, word_list, i, list_values)
-        #print(my_dict)
-        print(n)
-        print(my_word)
-        print(list_values)
-        if list_values[0] is n:
-            print("{}: {}".format(my_word, n))
-            list_values.pop(0)
-        #    print("{}: {}".format(my_word, my_dict[my_word]))
-    except Exception:
-        #list_values = list(my_dict.values())
-        list_values.sort(reverse=True)
-        #print(list_values)
-        return
