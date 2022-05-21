@@ -16,7 +16,10 @@ def count_words(subreddit, word_list):
         str_list = " ".join(hot_list).lower()
         for word in word_list:
             n = str_list.count(word)
-            my_dict[word] = n
+            if my_dict.get(word):
+                my_dict[word] = my_dict[word] + n
+            else:
+                my_dict[word] = n
         sort_dict = dict(sorted(my_dict.items(),
                                 key=itemgetter(1), reverse=True))
         for k, v in sort_dict.items():
