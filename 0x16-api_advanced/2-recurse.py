@@ -2,7 +2,6 @@
 """  function that queries the Reddit API;
 and print ten titles """
 import requests
-import json
 
 
 def recurse(subreddit, hot_list=[]):
@@ -10,7 +9,7 @@ def recurse(subreddit, hot_list=[]):
     header = {'User-Agent': 'my_user_agent'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     try:
-        response = requests.get(url, header,
+        response = requests.get(url, headers=header,
                                 allow_redirects=False).json().get(
                                     "data").get("children")
         recurse_2(0, response, hot_list)
