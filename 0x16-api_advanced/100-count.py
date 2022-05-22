@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """  function that queries the Reddit API;
 and print ten titles """
-import requests
 from operator import itemgetter
+import requests
 
 
 def count_words(subreddit, word_list):
@@ -15,7 +15,7 @@ def count_words(subreddit, word_list):
         word_list = str_word.split()
         str_list = " ".join(hot_list).lower()
         for word in word_list:
-            n = str_list.count(word)
+            n = str_list.split().count(word)
             if my_dict.get(word):
                 my_dict[word] = my_dict[word] + n
             else:
